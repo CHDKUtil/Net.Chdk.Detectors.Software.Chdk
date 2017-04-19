@@ -1,5 +1,6 @@
 ﻿using Net.Chdk.Model.Software;
 using System;
+using System.Globalization;
 using System.IO;
 
 namespace Net.Chdk.Detectors.Software.Chdk
@@ -54,11 +55,11 @@ namespace Net.Chdk.Detectors.Software.Chdk
             return File.GetCreationTimeUtc(diskbootPath);
         }
 
-        private static string GetLanguage(string chdkPath)
+        private static CultureInfo GetLanguage(string chdkPath)
         {
             var defaultPath = Path.Combine(chdkPath, "SCRIPTS", "default.lua");
             if (File.Exists(defaultPath))
-                return "de";
+                return CultureInfo.GetCultureInfo("de");
 
             return null;
         }
