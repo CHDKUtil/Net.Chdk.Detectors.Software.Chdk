@@ -1,4 +1,5 @@
-﻿using Net.Chdk.Model.Software;
+﻿using Net.Chdk.Model.Card;
+using Net.Chdk.Model.Software;
 using System;
 using System.Globalization;
 using System.IO;
@@ -9,9 +10,9 @@ namespace Net.Chdk.Detectors.Software.Chdk
     {
         private const string Name = "CHDK";
 
-        public ProductInfo GetProduct(string driveLetter)
+        public ProductInfo GetProduct(CardInfo cardInfo)
         {
-            string chdkPath = Path.Combine(driveLetter, Name);
+            string chdkPath = Path.Combine(cardInfo.DriveLetter, Name);
             if (!Directory.Exists(chdkPath))
                 return null;
 
@@ -19,7 +20,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
             {
                 Name = Name,
                 Version = GetVersion(chdkPath),
-                Created = GetCreationTime(driveLetter),
+                Created = GetCreationTime(cardInfo),
                 Language = GetLanguage(chdkPath),
             };
         }
@@ -49,9 +50,9 @@ namespace Net.Chdk.Detectors.Software.Chdk
             return null;
         }
 
-        private static DateTime GetCreationTime(string driveLetter)
+        private static DateTime GetCreationTime(CardInfo cardInfo)
         {
-            var diskbootPath = Path.Combine(driveLetter, "DISKBOOT.BIN");
+            var diskbootPath = Path.Combine(cardInfo.DriveLetter, "DISKBOOT.BIN");
             return File.GetCreationTimeUtc(diskbootPath);
         }
 
