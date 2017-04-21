@@ -53,8 +53,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         private static DateTime GetCreationTime(CardInfo cardInfo)
         {
-            var rootPath = cardInfo.GetRootPath();
-            var diskbootPath = Path.Combine(rootPath, "DISKBOOT.BIN");
+            string diskbootPath = cardInfo.GetDiskbootPath();
             return File.GetCreationTimeUtc(diskbootPath);
         }
 
