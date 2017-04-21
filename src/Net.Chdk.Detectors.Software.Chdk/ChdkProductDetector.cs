@@ -12,7 +12,8 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         public ProductInfo GetProduct(CardInfo cardInfo)
         {
-            string chdkPath = Path.Combine(cardInfo.DriveLetter, Name);
+            var rootPath = cardInfo.GetRootPath();
+            string chdkPath = Path.Combine(rootPath, Name);
             if (!Directory.Exists(chdkPath))
                 return null;
 
@@ -52,7 +53,8 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         private static DateTime GetCreationTime(CardInfo cardInfo)
         {
-            var diskbootPath = Path.Combine(cardInfo.DriveLetter, "DISKBOOT.BIN");
+            var rootPath = cardInfo.GetRootPath();
+            var diskbootPath = Path.Combine(rootPath, "DISKBOOT.BIN");
             return File.GetCreationTimeUtc(diskbootPath);
         }
 
