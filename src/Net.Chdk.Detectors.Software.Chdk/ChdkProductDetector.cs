@@ -10,14 +10,14 @@ namespace Net.Chdk.Detectors.Software.Chdk
     {
         private const string Name = "CHDK";
 
-        public ProductInfo GetProduct(CardInfo cardInfo)
+        public SoftwareProductInfo GetProduct(CardInfo cardInfo)
         {
             var rootPath = cardInfo.GetRootPath();
             string chdkPath = Path.Combine(rootPath, Name);
             if (!Directory.Exists(chdkPath))
                 return null;
 
-            return new ProductInfo
+            return new SoftwareProductInfo
             {
                 Name = Name,
                 Version = GetVersion(chdkPath),
