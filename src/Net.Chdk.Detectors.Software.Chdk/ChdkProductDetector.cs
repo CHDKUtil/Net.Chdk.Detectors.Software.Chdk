@@ -59,10 +59,6 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         private static CultureInfo GetLanguage(string chdkPath)
         {
-            var defaultPath = Path.Combine(chdkPath, "SCRIPTS", "default.lua");
-            if (File.Exists(defaultPath))
-                return CultureInfo.GetCultureInfo("de");
-
             return null;
         }
     }
