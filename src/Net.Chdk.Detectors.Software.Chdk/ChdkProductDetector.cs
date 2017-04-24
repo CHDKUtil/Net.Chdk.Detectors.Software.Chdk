@@ -26,27 +26,27 @@ namespace Net.Chdk.Detectors.Software.Chdk
             };
         }
 
-        private static string GetVersion(string chdkPath)
+        private static Version GetVersion(string chdkPath)
         {
             var cfg4Path = Path.Combine(chdkPath, "CCHDK4.CFG");
             if (File.Exists(cfg4Path))
-                return "1.4";
+                return new Version("1.4");
 
             var cfg3Path = Path.Combine(chdkPath, "CCHDK3.CFG");
             if (File.Exists(cfg4Path))
-                return "1.3";
+                return new Version("1.3");
 
             var cfg2Path = Path.Combine(chdkPath, "CCHDK2.CFG");
             if (File.Exists(cfg4Path))
-                return "1.2";
+                return new Version("1.2");
 
             var cfg1Path = Path.Combine(chdkPath, "CCHDK1.CFG");
             if (File.Exists(cfg4Path))
-                return "1.1";
+                return new Version("1.1");
 
             var cfgPath = Path.Combine(chdkPath, "CCHDK.CFG");
             if (File.Exists(cfg4Path))
-                return "1.0";
+                return new Version("1.0");
 
             return null;
         }
