@@ -59,6 +59,16 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         private static CultureInfo GetLanguage(string chdkPath)
         {
+            var dataPath = Path.Combine(chdkPath, "DATA");
+
+            var logoPath = Path.Combine(dataPath, "logo.dat");
+            if (File.Exists(logoPath))
+                return new CultureInfo("en");
+
+            var logoDePath = Path.Combine(dataPath, "logo_de.dat");
+            if (File.Exists(logoDePath))
+                return new CultureInfo("de");
+
             return null;
         }
     }
