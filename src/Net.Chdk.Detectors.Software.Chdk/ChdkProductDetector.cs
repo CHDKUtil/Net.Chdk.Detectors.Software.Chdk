@@ -13,7 +13,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
         public SoftwareProductInfo GetProduct(CardInfo cardInfo)
         {
             var rootPath = cardInfo.GetRootPath();
-            string chdkPath = Path.Combine(rootPath, Name);
+            var chdkPath = Path.Combine(rootPath, Name);
             if (!Directory.Exists(chdkPath))
                 return null;
 
@@ -53,7 +53,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         private static DateTime GetCreationTime(CardInfo cardInfo)
         {
-            string diskbootPath = cardInfo.GetDiskbootPath();
+            var diskbootPath = cardInfo.GetDiskbootPath();
             return File.GetCreationTimeUtc(diskbootPath);
         }
 
