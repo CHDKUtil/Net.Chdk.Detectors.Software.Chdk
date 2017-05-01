@@ -32,16 +32,32 @@ namespace Net.Chdk.Detectors.Software.Chdk
             if (File.Exists(cfg4Path))
                 return new Version("1.4");
 
+            var osd4Path = Path.Combine(chdkPath, "OSD__4.CFG");
+            if (File.Exists(osd4Path))
+                return new Version("1.4");
+
             var cfg3Path = Path.Combine(chdkPath, "CCHDK3.CFG");
             if (File.Exists(cfg3Path))
+                return new Version("1.3");
+
+            var osd3Path = Path.Combine(chdkPath, "OSD__3.CFG");
+            if (File.Exists(osd3Path))
                 return new Version("1.3");
 
             var cfg2Path = Path.Combine(chdkPath, "CCHDK2.CFG");
             if (File.Exists(cfg2Path))
                 return new Version("1.2");
 
+            var osd2Path = Path.Combine(chdkPath, "OSD__2.CFG");
+            if (File.Exists(osd2Path))
+                return new Version("1.2");
+
             var cfg1Path = Path.Combine(chdkPath, "CCHDK1.CFG");
             if (File.Exists(cfg1Path))
+                return new Version("1.1");
+
+            var osd1Path = Path.Combine(chdkPath, "OSD__1.CFG");
+            if (File.Exists(osd1Path))
                 return new Version("1.1");
 
             var cfgPath = Path.Combine(chdkPath, "CCHDK.CFG");
