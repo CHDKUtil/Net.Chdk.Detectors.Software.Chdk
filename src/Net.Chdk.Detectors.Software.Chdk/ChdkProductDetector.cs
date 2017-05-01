@@ -1,6 +1,7 @@
 ﻿using Net.Chdk.Model.Card;
 using Net.Chdk.Model.Software;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
@@ -9,6 +10,25 @@ namespace Net.Chdk.Detectors.Software.Chdk
     public sealed class ChdkProductDetector : IProductDetector
     {
         private const string Name = "CHDK";
+
+        private static readonly Dictionary<string, string> Versions = new Dictionary<string, string>
+        {
+            ["CCHDK4.CFG"] = "1.4",
+            ["OSD__4.CFG"] = "1.4",
+            ["CCHDK3.CFG"] = "1.3",
+            ["OSD__3.CFG"] = "1.3",
+            ["CCHDK2.CFG"] = "1.2",
+            ["OSD__2.CFG"] = "1.2",
+            ["CCHDK1.CFG"] = "1.1",
+            ["OSD__1.CFG"] = "1.1",
+            ["CCHDK.CFG"] = "1.0",
+        };
+
+        private static readonly Dictionary<string, string> Languages = new Dictionary<string, string>
+        {
+            ["logo.dat"] = "en",
+            ["logo_de.dat"] = "de",
+        };
 
         public SoftwareProductInfo GetProduct(CardInfo cardInfo)
         {
@@ -28,43 +48,13 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         private static Version GetVersion(string chdkPath)
         {
-            var cfg4Path = Path.Combine(chdkPath, "CCHDK4.CFG");
-            if (File.Exists(cfg4Path))
-                return new Version("1.4");
+            return GetValue(chdkPath, Versions, Version.Parse);
+        }
 
-            var osd4Path = Path.Combine(chdkPath, "OSD__4.CFG");
-            if (File.Exists(osd4Path))
-                return new Version("1.4");
-
-            var cfg3Path = Path.Combine(chdkPath, "CCHDK3.CFG");
-            if (File.Exists(cfg3Path))
-                return new Version("1.3");
-
-            var osd3Path = Path.Combine(chdkPath, "OSD__3.CFG");
-            if (File.Exists(osd3Path))
-                return new Version("1.3");
-
-            var cfg2Path = Path.Combine(chdkPath, "CCHDK2.CFG");
-            if (File.Exists(cfg2Path))
-                return new Version("1.2");
-
-            var osd2Path = Path.Combine(chdkPath, "OSD__2.CFG");
-            if (File.Exists(osd2Path))
-                return new Version("1.2");
-
-            var cfg1Path = Path.Combine(chdkPath, "CCHDK1.CFG");
-            if (File.Exists(cfg1Path))
-                return new Version("1.1");
-
-            var osd1Path = Path.Combine(chdkPath, "OSD__1.CFG");
-            if (File.Exists(osd1Path))
-                return new Version("1.1");
-
-            var cfgPath = Path.Combine(chdkPath, "CCHDK.CFG");
-            if (File.Exists(cfgPath))
-                return new Version("1.0");
-
-            return null;
+        private static CultureInfo GetLanguage(string chdkPath)
+        {
+            var dataPath = Path.Combine(chdkPath, "DATA");
+            return GetValue(dataPath, Languages, CultureInfo.GetCultureInfo);
         }
 
         private static DateTime GetCreationTime(CardInfo cardInfo)
@@ -73,18 +63,15 @@ namespace Net.Chdk.Detectors.Software.Chdk
             return File.GetCreationTimeUtc(diskbootPath);
         }
 
-        private static CultureInfo GetLanguage(string chdkPath)
+        private static T GetValue<T>(string basePath, IDictionary<string, string> mapping, Func<string, T> getValue)
+            where T : class
         {
-            var dataPath = Path.Combine(chdkPath, "DATA");
-
-            var logoPath = Path.Combine(dataPath, "logo.dat");
-            if (File.Exists(logoPath))
-                return CultureInfo.GetCultureInfo("en");
-
-            var logoDePath = Path.Combine(dataPath, "logo_de.dat");
-            if (File.Exists(logoDePath))
-                return CultureInfo.GetCultureInfo("de");
-
+            foreach (var kvp in mapping)
+            {
+                var filePath = Path.Combine(basePath, kvp.Key);
+                if (File.Exists(filePath))
+                    return getValue(kvp.Value);
+            }
             return null;
         }
     }
