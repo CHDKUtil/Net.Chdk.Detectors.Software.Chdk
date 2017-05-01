@@ -1,5 +1,6 @@
 ﻿using Net.Chdk.Model.Card;
 using Net.Chdk.Model.Software;
+using Net.Chdk.Providers.Boot;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -30,6 +31,13 @@ namespace Net.Chdk.Detectors.Software.Chdk
             ["logo_de.dat"] = "de",
         };
 
+        private IBootProvider BootProvider { get; }
+
+        public ChdkProductDetector(IBootProvider bootProvider)
+        {
+            BootProvider = bootProvider;
+        }
+
         public SoftwareProductInfo GetProduct(CardInfo cardInfo)
         {
             var rootPath = cardInfo.GetRootPath();
@@ -57,9 +65,10 @@ namespace Net.Chdk.Detectors.Software.Chdk
             return GetValue(dataPath, Languages, CultureInfo.GetCultureInfo);
         }
 
-        private static DateTime GetCreationTime(CardInfo cardInfo)
+        private DateTime GetCreationTime(CardInfo cardInfo)
         {
-            var diskbootPath = cardInfo.GetDiskbootPath();
+            var rootPath = cardInfo.GetRootPath();
+            var diskbootPath = Path.Combine(rootPath, BootProvider.FileName);
             return File.GetCreationTimeUtc(diskbootPath);
         }
 
