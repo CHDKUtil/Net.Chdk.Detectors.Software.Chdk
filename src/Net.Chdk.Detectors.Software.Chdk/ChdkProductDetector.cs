@@ -79,11 +79,11 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
             var logoPath = Path.Combine(dataPath, "logo.dat");
             if (File.Exists(logoPath))
-                return new CultureInfo("en");
+                return CultureInfo.GetCultureInfo("en");
 
             var logoDePath = Path.Combine(dataPath, "logo_de.dat");
             if (File.Exists(logoDePath))
-                return new CultureInfo("de");
+                return CultureInfo.GetCultureInfo("de");
 
             return null;
         }
