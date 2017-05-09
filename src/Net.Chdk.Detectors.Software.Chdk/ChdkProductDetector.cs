@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Net.Chdk.Detectors.Software.Chdk
 {
-    public sealed class ChdkProductDetector : IProductDetector
+    sealed class ChdkProductDetector : IProductDetector
     {
         private const string Name = "CHDK";
 
