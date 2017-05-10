@@ -57,6 +57,10 @@
     <Compile Include="ServiceCollectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Net.Chdk.Detectors.Software.Binary\src\Net.Chdk.Detectors.Software.Binary\Net.Chdk.Detectors.Software.Binary.csproj">
+      <Project>{18181475-991A-41F3-9BBE-F0F0916D8814}</Project>
+      <Name>Net.Chdk.Detectors.Software.Binary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Net.Chdk.Detectors.Software.Core\src\Net.Chdk.Detectors.Software.Core\Net.Chdk.Detectors.Software.Core.csproj">
       <Project>{D385AB93-0DB5-45AA-994A-5E4B671BEF40}</Project>
       <Name>Net.Chdk.Detectors.Software.Core</Name>

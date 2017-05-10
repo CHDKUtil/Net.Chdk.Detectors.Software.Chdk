@@ -17,9 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Chdk.Providers.Boot.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Chdk.Encoders.DancingBits", "..\..\..\Net.Chdk.Encoders.DancingBits\src\Net.Chdk.Encoders.DancingBits\Net.Chdk.Encoders.DancingBits.csproj", "{62DA1E42-36A6-4FA5-8439-6634D47FDBF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Chdk.Detectors.Software.Binary", "..\..\..\Net.Chdk.Detectors.Software.Binary\src\Net.Chdk.Detectors.Software.Binary\Net.Chdk.Detectors.Software.Binary.csproj", "{18181475-991A-41F3-9BBE-F0F0916D8814}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems*{0bbe7ef7-7715-4a9d-9f0c-2abe5f07ea33}*SharedItemsImports = 4
+		..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems*{18181475-991a-41f3-9bbe-f0f0916d8814}*SharedItemsImports = 4
 		..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems*{4e4fa15a-4a88-4caf-a8e1-fc507177ead4}*SharedItemsImports = 4
 		..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems*{62da1e42-36a6-4fa5-8439-6634d47fdbf3}*SharedItemsImports = 4
 		..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems*{7f492ad5-c9e5-4e13-9587-d0b88ba8d209}*SharedItemsImports = 4
@@ -56,6 +59,10 @@ Global
 		{62DA1E42-36A6-4FA5-8439-6634D47FDBF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62DA1E42-36A6-4FA5-8439-6634D47FDBF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62DA1E42-36A6-4FA5-8439-6634D47FDBF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18181475-991A-41F3-9BBE-F0F0916D8814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18181475-991A-41F3-9BBE-F0F0916D8814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18181475-991A-41F3-9BBE-F0F0916D8814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18181475-991A-41F3-9BBE-F0F0916D8814}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
