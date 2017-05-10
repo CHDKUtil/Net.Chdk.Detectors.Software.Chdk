@@ -20,10 +20,10 @@ namespace Net.Chdk.Detectors.Software.Chdk
         protected override Version GetVersion(string[] strings)
         {
             var split = strings[0].Trim('\'').Split(' ');
-            var versionStr = GetVersionString(split[1].Split('-'));
-            if (versionStr == null)
+            if (split.Length != 2)
                 return null;
-            return Version.Parse(versionStr);
+            var str = GetVersionString(split[1].Split('-'));
+            return GetVersion(str);
         }
 
         protected override CultureInfo GetLanguage(string[] strings)
@@ -44,8 +44,6 @@ namespace Net.Chdk.Detectors.Software.Chdk
         protected override DateTime? GetCreationDate(string[] strings)
         {
             var str = TrimStart(strings[1], "Build: ");
-            if (str == null)
-                return null;
             return GetCreationDate(str);
         }
 
@@ -55,11 +53,9 @@ namespace Net.Chdk.Detectors.Software.Chdk
             if (str == null)
                 return null;
             var split = str.Split(new[] { " - " }, StringSplitOptions.None);
-            return new SoftwareCameraInfo
-            {
-                Platform = split[0],
-                Revision = split[1]
-            };
+            if (split.Length != 2)
+                return null;
+            return GetCamera(split[0], split[1]);
         }
 
         private static string GetVersionString(string[] versionSplit)
