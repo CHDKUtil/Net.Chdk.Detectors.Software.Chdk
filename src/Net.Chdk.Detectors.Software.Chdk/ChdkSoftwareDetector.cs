@@ -19,8 +19,10 @@ namespace Net.Chdk.Detectors.Software.Chdk
         protected override Version GetVersion(string[] strings)
         {
             var split = strings[0].Trim('\'').Split(' ');
-            var versionStr = split[1];
-            return Version.Parse(versionStr.Replace('-', '.'));
+            var versionStr = GetVersionString(split[1].Split('-'));
+            if (versionStr == null)
+                return null;
+            return Version.Parse(versionStr);
         }
 
         protected override CultureInfo GetLanguage(string[] strings)
@@ -57,6 +59,19 @@ namespace Net.Chdk.Detectors.Software.Chdk
                 Platform = split[0],
                 Revision = split[1]
             };
+        }
+
+        private static string GetVersionString(string[] versionSplit)
+        {
+            switch (versionSplit.Length)
+            {
+                case 0:
+                    return null;
+                case 1:
+                    return versionSplit[0];
+                default:
+                    return string.Join(".", versionSplit[0], versionSplit[1]);
+            }
         }
 
         private static string TrimStart(string str, string prefix)
