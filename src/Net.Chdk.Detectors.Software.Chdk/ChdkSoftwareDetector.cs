@@ -2,20 +2,35 @@
 using Net.Chdk.Model.Software;
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace Net.Chdk.Detectors.Software.Chdk
 {
     sealed class ChdkSoftwareDetector : InnerBinarySoftwareDetector
     {
+        private static readonly string[] Prefixes = new[]
+        {
+            "Version ",
+            "Firmware ",
+        };
+
         protected override string Name => "CHDK";
 
         protected override string[] Strings => new[]
         {
-            "CHDK Version ",
-            "CHDK Firmware ",
+            "CHDK ",
         };
 
         protected override int StringCount => 3;
+
+        public override SoftwareInfo GetSoftware(byte[] buffer, int index)
+        {
+            var index2 = index;
+            var first = GetString(buffer, ref index2);
+            return Prefixes
+                .Select(p => GetSoftware(buffer, index, first, p))
+                .FirstOrDefault(s => s != null);
+        }
 
         protected override Version GetVersion(string[] strings)
         {
@@ -69,6 +84,13 @@ namespace Net.Chdk.Detectors.Software.Chdk
                 default:
                     return string.Join(".", versionSplit[0], versionSplit[1]);
             }
+        }
+
+        private SoftwareInfo GetSoftware(byte[] buffer, int index, string first, string prefix)
+        {
+            if (!first.StartsWith(prefix))
+                return null;
+            return base.GetSoftware(buffer, index + prefix.Length);
         }
 
         private static string TrimStart(string str, string prefix)
