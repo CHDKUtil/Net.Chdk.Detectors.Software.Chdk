@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Chdk.Encoders.DancingBi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Chdk.Detectors.Software.Binary", "..\..\..\Net.Chdk.Detectors.Software.Binary\src\Net.Chdk.Detectors.Software.Binary\Net.Chdk.Detectors.Software.Binary.csproj", "{18181475-991A-41F3-9BBE-F0F0916D8814}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Chdk.Providers.Software.Core", "..\..\..\Net.Chdk.Providers.Software.Core\src\Net.Chdk.Providers.Software.Core\Net.Chdk.Providers.Software.Core.csproj", "{F763A515-BDB0-4088-8B23-15B02C094485}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems*{0bbe7ef7-7715-4a9d-9f0c-2abe5f07ea33}*SharedItemsImports = 4
@@ -29,6 +31,7 @@ Global
 		..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems*{83c6a77c-3286-4f5f-b628-3b971097ad05}*SharedItemsImports = 13
 		..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems*{a41d61fe-2fb8-4892-ac7d-ecee7e61c637}*SharedItemsImports = 4
 		..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems*{d385ab93-0db5-45aa-994a-5e4b671bef40}*SharedItemsImports = 4
+		..\..\..\Net.Chdk.Core\src\Net.Chdk.Shared\Net.Chdk.Shared.projitems*{f763a515-bdb0-4088-8b23-15b02c094485}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +66,10 @@ Global
 		{18181475-991A-41F3-9BBE-F0F0916D8814}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18181475-991A-41F3-9BBE-F0F0916D8814}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18181475-991A-41F3-9BBE-F0F0916D8814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F763A515-BDB0-4088-8B23-15B02C094485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F763A515-BDB0-4088-8B23-15B02C094485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F763A515-BDB0-4088-8B23-15B02C094485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F763A515-BDB0-4088-8B23-15B02C094485}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

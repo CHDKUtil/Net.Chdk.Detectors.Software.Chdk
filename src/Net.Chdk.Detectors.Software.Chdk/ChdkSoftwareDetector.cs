@@ -1,5 +1,6 @@
 ﻿using Net.Chdk.Detectors.Software.Binary;
 using Net.Chdk.Model.Software;
+using Net.Chdk.Providers.Software;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -8,13 +9,21 @@ namespace Net.Chdk.Detectors.Software.Chdk
 {
     sealed class ChdkSoftwareDetector : InnerBinarySoftwareDetector
     {
+        private const string Release = "release";
+        private const string Trunk = "trunk";
+
         private static readonly string[] Prefixes = new[]
         {
             "Version ",
             "Firmware ",
         };
 
-        protected override string Name => "CHDK";
+        public ChdkSoftwareDetector(ISourceProvider sourceProvider)
+            : base(sourceProvider)
+        {
+        }
+
+        protected override string ProductName => "CHDK";
 
         protected override string[] Strings => new[]
         {
@@ -32,7 +41,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
                 .FirstOrDefault(s => s != null);
         }
 
-        protected override Version GetVersion(string[] strings)
+        protected override Version GetProductVersion(string[] strings)
         {
             var split = strings[0].Trim('\'').Split(' ');
             if (split.Length != 2)
@@ -43,9 +52,8 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         protected override CultureInfo GetLanguage(string[] strings)
         {
-            var split = strings[0].Trim('\'').Split(' ');
-            var nameStr = split[0];
-            switch (nameStr)
+            var sourceName = GetSourceName(strings);
+            switch (sourceName)
             {
                 case "CHDK":
                     return CultureInfo.GetCultureInfo("en");
@@ -71,6 +79,19 @@ namespace Net.Chdk.Detectors.Software.Chdk
             if (split.Length != 2)
                 return null;
             return GetCamera(split[0], split[1]);
+        }
+
+        protected override string GetSourceName(string[] strings)
+        {
+            return strings[0].Trim('\'').Split(' ')[0];
+        }
+
+        protected override string GetSourceChannel(string[] strings)
+        {
+            var version = GetProductVersion(strings);
+            if ((version.Major > 1 || (version.Major == 1 && version.Minor >= 4)) && version.MajorRevision > 0)
+                return Trunk;
+            return Release;
         }
 
         private static string GetVersionString(string[] versionSplit)
