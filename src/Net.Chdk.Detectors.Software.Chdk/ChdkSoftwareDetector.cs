@@ -9,9 +9,6 @@ namespace Net.Chdk.Detectors.Software.Chdk
 {
     sealed class ChdkSoftwareDetector : InnerBinarySoftwareDetector
     {
-        private const string Release = "release";
-        private const string Trunk = "trunk";
-
         private static readonly string[] Prefixes = new[]
         {
             "Version ",
@@ -84,14 +81,6 @@ namespace Net.Chdk.Detectors.Software.Chdk
         protected override string GetSourceName(string[] strings)
         {
             return strings[0].Trim('\'').Split(' ')[0];
-        }
-
-        protected override string GetSourceChannel(string[] strings)
-        {
-            var version = GetProductVersion(strings);
-            if ((version.Major > 1 || (version.Major == 1 && version.Minor >= 4)) && version.MajorRevision > 0)
-                return Trunk;
-            return Release;
         }
 
         private static string GetVersionString(string[] versionSplit)
