@@ -20,7 +20,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
         {
         }
 
-        protected override string ProductName => "CHDK";
+        public override string ProductName => "CHDK";
 
         protected override string[] Strings => new[]
         {
