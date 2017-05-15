@@ -4,6 +4,7 @@ using Net.Chdk.Providers.Software;
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace Net.Chdk.Detectors.Software.Chdk
 {
@@ -14,6 +15,15 @@ namespace Net.Chdk.Detectors.Software.Chdk
             "Version ",
             "Firmware ",
         };
+
+        private static byte[][] PrefixBytes;
+
+        static ChdkSoftwareDetector()
+        {
+            PrefixBytes = new byte[Prefixes.Length][];
+            for (var i = 0; i < PrefixBytes.Length; i++)
+                PrefixBytes[i] = Encoding.ASCII.GetBytes(Prefixes[i]);
+        }
 
         public ChdkSoftwareDetector(ISourceProvider sourceProvider)
             : base(sourceProvider)
@@ -31,11 +41,10 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         public override SoftwareInfo GetSoftware(byte[] buffer, int index)
         {
-            var index2 = index;
-            var first = GetString(buffer, ref index2);
-            return Prefixes
-                .Select(p => GetSoftware(buffer, index, first, p))
-                .FirstOrDefault(s => s != null);
+            for (var i = 0; i < PrefixBytes.Length; i++)
+                if (Equals(buffer, PrefixBytes[i], index))
+                    return base.GetSoftware(buffer, index + PrefixBytes[i].Length);
+            return null;
         }
 
         protected override Version GetProductVersion(string[] strings)
@@ -96,18 +105,19 @@ namespace Net.Chdk.Detectors.Software.Chdk
             }
         }
 
-        private SoftwareInfo GetSoftware(byte[] buffer, int index, string first, string prefix)
-        {
-            if (!first.StartsWith(prefix))
-                return null;
-            return base.GetSoftware(buffer, index + prefix.Length);
-        }
-
         private static string TrimStart(string str, string prefix)
         {
             if (!str.StartsWith(prefix))
                 return null;
             return str.Substring(prefix.Length);
+        }
+
+        private static bool Equals(byte[] buffer, byte[] bytes, int start)
+        {
+            for (var j = 0; j < bytes.Length; j++)
+                if (buffer[start + j] != bytes[j])
+                    return false;
+            return true;
         }
     }
 }
