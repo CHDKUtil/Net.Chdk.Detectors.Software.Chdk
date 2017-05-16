@@ -3,12 +3,11 @@ using Net.Chdk.Model.Software;
 using Net.Chdk.Providers.Software;
 using System;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 
 namespace Net.Chdk.Detectors.Software.Chdk
 {
-    sealed class ChdkSoftwareDetector : InnerBinarySoftwareDetector
+    sealed class ChdkSoftwareDetector : ProductBinarySoftwareDetector
     {
         private static readonly string[] Prefixes = new[]
         {

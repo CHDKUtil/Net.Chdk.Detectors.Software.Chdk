@@ -7,7 +7,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
         public static IServiceCollection AddChdkSoftwareDetector(this IServiceCollection serviceCollection)
         {
             return serviceCollection
-                .AddSingleton<IInnerBinarySoftwareDetector, ChdkSoftwareDetector>();
+                .AddSingleton<IProductBinarySoftwareDetector, ChdkSoftwareDetector>();
         }
 
         public static IServiceCollection AddChdkProductDetector(this IServiceCollection serviceCollection)
