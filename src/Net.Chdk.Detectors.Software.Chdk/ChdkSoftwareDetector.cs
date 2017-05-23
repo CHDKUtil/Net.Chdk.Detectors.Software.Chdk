@@ -104,13 +104,6 @@ namespace Net.Chdk.Detectors.Software.Chdk
             }
         }
 
-        private static string TrimStart(string str, string prefix)
-        {
-            if (!str.StartsWith(prefix))
-                return null;
-            return str.Substring(prefix.Length);
-        }
-
         private static bool Equals(byte[] buffer, byte[] bytes, int start)
         {
             for (var j = 0; j < bytes.Length; j++)
