@@ -28,10 +28,12 @@ namespace Net.Chdk.Detectors.Software.Chdk
             ["logo_de.dat"] = "de",
         };
 
-        public ChdkProductDetector(IBootProvider bootProvider)
-            : base(bootProvider)
+        public ChdkProductDetector(IBootProviderResolver bootProviderResolver)
+            : base(bootProviderResolver)
         {
         }
+
+        public override string CategoryName => "PS";
 
         protected override string ProductName => "CHDK";
 
