@@ -71,13 +71,13 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         protected override DateTime? GetCreationDate(string[] strings)
         {
-            var str = TrimStart(strings[1], "Build: ");
+            var str = strings[1].TrimStart("Build: ");
             return GetCreationDate(str);
         }
 
         protected override SoftwareCameraInfo GetCamera(string[] strings)
         {
-            var str = TrimStart(strings[2], "Camera: ");
+            var str = strings[2].TrimStart("Camera: ");
             if (str == null)
                 return null;
             var split = str.Split(new[] { " - " }, StringSplitOptions.None);
