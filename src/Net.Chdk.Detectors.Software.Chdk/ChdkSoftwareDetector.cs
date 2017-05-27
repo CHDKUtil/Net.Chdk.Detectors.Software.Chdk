@@ -91,6 +91,20 @@ namespace Net.Chdk.Detectors.Software.Chdk
             return strings[0].Trim('\'').Split(' ')[0];
         }
 
+        protected override SoftwareBuildInfo GetBuild(string[] strings)
+        {
+            return new SoftwareBuildInfo
+            {
+                Changeset = GetChangeset(strings),
+            };
+        }
+
+        private string GetChangeset(string[] strings)
+        {
+            var version = GetProductVersion(strings);
+            return version?.MinorRevision.ToString();
+        }
+
         private static string GetVersionString(string[] versionSplit)
         {
             switch (versionSplit.Length)
