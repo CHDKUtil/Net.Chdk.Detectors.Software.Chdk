@@ -31,10 +31,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         public override string ProductName => "CHDK";
 
-        protected override string[] Strings => new[]
-        {
-            "CHDK ",
-        };
+        protected override string String => "CHDK ";
 
         protected override int StringCount => 3;
 
