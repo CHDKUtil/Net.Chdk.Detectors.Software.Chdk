@@ -33,7 +33,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
         public override string ProductName => "CHDK";
 
         protected override string String => "CHDK ";
-        protected override int StringCount => 3;
+        protected override int StringCount => 4;
 
         public override SoftwareInfo GetSoftware(byte[] buffer, int index)
         {
@@ -93,6 +93,24 @@ namespace Net.Chdk.Detectors.Software.Chdk
             return new SoftwareBuildInfo
             {
                 Changeset = GetChangeset(strings),
+            };
+        }
+
+        protected override SoftwareCompilerInfo GetCompiler(string[] strings)
+        {
+            var str = strings[3].TrimStart("Compiler: ");
+            if (str == null)
+                return null;
+            var split = str.Split(' ');
+            if (split.Length != 2)
+                return null;
+            Version version;
+            if (!Version.TryParse(split[1], out version))
+                return null;
+            return new SoftwareCompilerInfo
+            {
+                Name = split[0],
+                Version = version
             };
         }
 
