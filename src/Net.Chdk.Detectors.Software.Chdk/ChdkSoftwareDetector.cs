@@ -98,10 +98,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
 
         protected override SoftwareCompilerInfo GetCompiler(string[] strings)
         {
-            var str = strings[3].TrimStart("Compiler: ");
-            if (str == null)
-                return null;
-            var split = str.Split(' ');
+            var split = strings[3].Split(' ');
             if (split.Length != 2)
                 return null;
             Version version;
