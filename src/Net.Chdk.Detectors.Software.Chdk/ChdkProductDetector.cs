@@ -1,5 +1,6 @@
 ﻿using Net.Chdk.Detectors.Software.Product;
 using Net.Chdk.Providers.Boot;
+using Net.Chdk.Providers.Product;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,12 +29,10 @@ namespace Net.Chdk.Detectors.Software.Chdk
             ["logo_de.dat"] = "de",
         };
 
-        public ChdkProductDetector(IBootProviderResolver bootProviderResolver)
-            : base(bootProviderResolver)
+        public ChdkProductDetector(IProductProvider productProvider, IBootProvider bootProvider)
+            : base(productProvider, bootProvider)
         {
         }
-
-        public override string CategoryName => "PS";
 
         protected override string ProductName => "CHDK";
 
