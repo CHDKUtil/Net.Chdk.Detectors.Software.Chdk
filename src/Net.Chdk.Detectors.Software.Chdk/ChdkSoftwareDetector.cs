@@ -1,5 +1,6 @@
 ﻿using Net.Chdk.Detectors.Software.Product;
 using Net.Chdk.Model.Software;
+using Net.Chdk.Providers.Product;
 using Net.Chdk.Providers.Software;
 using System;
 using System.Globalization;
@@ -24,12 +25,11 @@ namespace Net.Chdk.Detectors.Software.Chdk
                 PrefixBytes[i] = Encoding.ASCII.GetBytes(Prefixes[i]);
         }
 
-        public ChdkSoftwareDetector(ISourceProvider sourceProvider)
-            : base(sourceProvider)
+        public ChdkSoftwareDetector(IProductProvider productProvider, ISourceProvider sourceProvider)
+            : base(productProvider, sourceProvider)
         {
         }
 
-        public override string CategoryName => "PS";
         public override string ProductName => "CHDK";
 
         protected override string String => "CHDK ";
