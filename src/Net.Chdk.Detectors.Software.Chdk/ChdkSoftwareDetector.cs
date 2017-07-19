@@ -58,9 +58,9 @@ namespace Net.Chdk.Detectors.Software.Chdk
             switch (sourceName)
             {
                 case "CHDK":
-                    return CultureInfo.GetCultureInfo("en");
+                    return new CultureInfo("en");
                 case "CHDK_DE":
-                    return CultureInfo.GetCultureInfo("de");
+                    return new CultureInfo("de");
                 default:
                     return null;
             }
@@ -101,8 +101,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
             var split = strings[3].Split(' ');
             if (split.Length != 2)
                 return null;
-            Version version;
-            if (!Version.TryParse(split[1], out version))
+            if (!Version.TryParse(split[1], out Version version))
                 return null;
             return new SoftwareCompilerInfo
             {
