@@ -45,7 +45,7 @@ namespace Net.Chdk.Detectors.Software.Chdk
         protected override CultureInfo GetLanguage(string rootPath)
         {
             var dataPath = Path.Combine(rootPath, ProductName, "DATA");
-            return GetValue(dataPath, DataLanguages, n => new CultureInfo(n));
+            return GetValue(dataPath, DataLanguages, GetCultureInfo);
         }
     }
 }

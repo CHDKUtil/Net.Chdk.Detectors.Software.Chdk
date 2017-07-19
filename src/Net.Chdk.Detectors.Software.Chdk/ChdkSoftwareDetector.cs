@@ -58,9 +58,9 @@ namespace Net.Chdk.Detectors.Software.Chdk
             switch (sourceName)
             {
                 case "CHDK":
-                    return new CultureInfo("en");
+                    return GetCultureInfo("en");
                 case "CHDK_DE":
-                    return new CultureInfo("de");
+                    return GetCultureInfo("de");
                 default:
                     return null;
             }
